@@ -63,17 +63,9 @@ function HomePage() {
                 Supports MP4, WebM, AVI and more...
               </p>
             </div>
-          </label>
+          </label>{" "}
         </div>
       </div>
-
-      {/* Footer */}
-      <footer className="absolute bottom-8 text-center">
-        <div className="text-gray-500">
-          <span>Made by: </span>
-          <span className="text-white font-semibold">Dawidekk</span>
-        </div>
-      </footer>
     </main>
   );
 }

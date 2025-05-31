@@ -53,7 +53,7 @@ function PlayerPage() {
         {/* Header */}
         <div className="text-center mb-12">
           <h1 className="font-bold text-5xl mb-4 text-white tracking-tight">
-            Video Player
+            Edit Your Video
           </h1>
           <p className="text-lg text-gray-400 font-light">
             Control your video playback speed
@@ -72,9 +72,8 @@ function PlayerPage() {
               style={{ maxHeight: "70vh" }}
             />
           </div>
-
           {/* Speed Controls */}
-          <div className="modern-card p-8 w-full max-w-md">
+          <div className="modern-card p-8 m-8 w-full max-w-md">
             <div className="flex flex-col items-center space-y-6">
               <h3 className="text-2xl font-semibold text-white">
                 Speed Control
@@ -99,26 +98,17 @@ function PlayerPage() {
               </div>
             </div>
           </div>
-
           {/* Navigation Buttons */}
-          <div className="flex space-x-4 mb-8">
+          <div className="flex space-x-4 m-8">
             <button
               onClick={goBackToUpload}
               className="modern-button px-8 py-3 rounded-xl text-lg"
             >
               ← Upload New Video
             </button>
-          </div>
+          </div>{" "}
         </div>
       </div>
-
-      {/* Footer */}
-      <footer className="text-center py-8 mt-12">
-        <div className="text-gray-500">
-          <span>Made by: </span>
-          <span className="text-white font-semibold">Dawidekk</span>
-        </div>
-      </footer>
     </main>
   );
 }
