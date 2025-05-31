@@ -37,7 +37,6 @@ function PlayerPage() {
     // Navigate back to home page
     navigate("/");
   }
-
   if (!videoSrc) {
     return (
       <div className="w-screen h-screen bg-black text-white flex items-center justify-center">
@@ -47,33 +46,45 @@ function PlayerPage() {
       </div>
     );
   }
+
   return (
-    <main className="min-h-screen bg-black text-white font-sans overflow-x-hidden">
-      <div className="container mx-auto px-4 py-8 max-w-7xl">
+    <main className="min-h-screen bg-black text-white font-sans overflow-x-hidden relative">
+      {" "}
+      {/* Top Right Button - Fixed to very corner */}
+      <div className="fixed top-4 right-4 z-50">
+        <button
+          onClick={goBackToUpload}
+          className="white-button px-4 py-2 rounded-lg text-sm"
+        >
+          ← Upload New Video
+        </button>
+      </div>
+      <div className="w-full py-8">
         {/* Header */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-12 px-4">
           <h1 className="font-bold text-5xl mb-4 text-white tracking-tight">
             Edit Your Video
           </h1>
           <p className="text-lg text-gray-400 font-light">
             Control your video playback speed
           </p>
-        </div>
-
+        </div>{" "}
         {/* Video Player Section */}
-        <div className="flex flex-col items-center space-y-8">
+        <div className="flex flex-col items-center space-y-8 px-4">
           {/* Video Container */}
-          <div className="video-container">
+          <div className="video-container w-full max-w-6xl">
             <video
+              controlsList="nodownload noremoteplayback noplaybackrate nofullscreen"
+              disablePictureInPicture
               ref={videoRef}
               className="w-full h-auto border-2 border-gray-600 rounded-2xl shadow-2xl bg-black"
               src={videoSrc}
               controls
-              style={{ maxHeight: "70vh" }}
+              style={{ maxHeight: "50vh" }}
             />
           </div>
           {/* Speed Controls */}
-          <div className="modern-card p-8 m-8 w-full max-w-md">
+          <div className="modern-card m-6 p-8 w-full max-w-md">
             <div className="flex flex-col items-center space-y-6">
               <h3 className="text-2xl font-semibold text-white">
                 Speed Control
@@ -83,7 +94,7 @@ function PlayerPage() {
                 <input
                   value={speed}
                   onChange={changeSpeed}
-                  className="flex-1 slider focus-ring"
+                  className="flex-1 modern-slider"
                   type="range"
                   min={0.25}
                   max={3}
@@ -98,15 +109,6 @@ function PlayerPage() {
               </div>
             </div>
           </div>
-          {/* Navigation Buttons */}
-          <div className="flex space-x-4 m-8">
-            <button
-              onClick={goBackToUpload}
-              className="modern-button px-8 py-3 rounded-xl text-lg"
-            >
-              ← Upload New Video
-            </button>
-          </div>{" "}
         </div>
       </div>
     </main>
