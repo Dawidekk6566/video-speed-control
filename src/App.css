@@ -1,6 +1,72 @@
 @import "tailwindcss";
 
 /* Modern 2025 Style - Clean Black & White Design */
+
+/* Global styling and reset */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #333 #000;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #000;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 4px;
+  transition: background 0.2s ease;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Ensure black background everywhere */
+html,
+body {
+  background: #000 !important;
+  color: #fff !important;
+}
+
+/* Remove white backgrounds and fix input styling */
+input[type="file"] {
+  background: transparent !important;
+  color: #fff !important;
+  border: none !important;
+}
+
+input[type="file"]::-webkit-file-upload-button {
+  background: #333 !important;
+  color: #fff !important;
+  border: 1px solid #666 !important;
+  border-radius: 8px !important;
+  padding: 8px 16px !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+}
+
+input[type="file"]::-webkit-file-upload-button:hover {
+  background: #555 !important;
+  border-color: #888 !important;
+}
+
+/* Video element styling - prevent any white backgrounds */
+video {
+  background: #000 !important;
+  outline: none !important;
+}
+
+video::-webkit-media-controls-panel {
+  background-color: rgba(0, 0, 0, 0.8) !important;
+}
+
+/* Slider styling */
 .slider {
   background: #1a1a1a;
   outline: none;
@@ -55,6 +121,7 @@
   background: #ffffff;
   color: #000000;
   transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
 }
 
 /* Clean borders */
@@ -78,10 +145,62 @@
 .modern-card:hover {
   border-color: #666;
   transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
 }
 
 /* Minimal focus states */
 .focus-ring:focus {
   outline: 2px solid #ffffff;
   outline-offset: 2px;
+}
+
+/* Video responsive container */
+.video-container {
+  position: relative;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.video-container video {
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  border: 2px solid #333;
+  background: #000 !important;
+}
+
+/* Responsive design improvements */
+@media (max-width: 768px) {
+  .video-container {
+    max-width: 100%;
+    padding: 0 1rem;
+  }
+
+  .modern-card {
+    margin: 0 1rem;
+  }
+
+  .text-5xl {
+    font-size: 2.5rem;
+  }
+
+  .text-7xl {
+    font-size: 3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .text-5xl {
+    font-size: 2rem;
+  }
+
+  .text-7xl {
+    font-size: 2.5rem;
+  }
+
+  .modern-button {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+  }
 }
