@@ -185,12 +185,43 @@ video::-webkit-media-controls-panel {
   font-weight: 500;
 }
 
-.white-button:hover {
+.white-button:hover:not(:disabled) {
   background: #f0f0f0;
   border-color: #f0f0f0;
   cursor: pointer;
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+}
+
+.white-button:disabled {
+  background: #666666;
+  border-color: #666666;
+  color: #333333;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.green-button {
+  background: #21d448;
+  color: #000000;
+  transition: all 0.2s ease;
+  font-weight: 500;
+}
+
+.green-button:hover:not(:disabled) {
+  cursor: pointer;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+}
+
+.white-button:disabled {
+  background: #666666;
+  border-color: #666666;
+  color: #333333;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
 }
 
 /* Clean borders */

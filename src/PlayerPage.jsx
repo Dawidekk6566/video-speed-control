@@ -5,6 +5,7 @@ function PlayerPage() {
   const videoRef = useRef(null);
   const [speed, setSpeed] = useState(1);
   const [videoSrc, setVideoSrc] = useState(null);
+  const [isProcessing, setIsProcessing] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -25,7 +26,6 @@ function PlayerPage() {
       videoRef.current.playbackRate = newSpeed;
     }
   }
-
   function goBackToUpload() {
     // Clean up the video URL
     if (videoSrc) {
@@ -36,6 +36,44 @@ function PlayerPage() {
     setSpeed(1);
     // Navigate back to home page
     navigate("/");
+  }
+  async function downloadVideoWithSpeed() {
+    if (!videoRef.current || !videoSrc) return;
+
+    setIsProcessing(true);
+
+    try {
+      // Get the original video file from localStorage
+      const originalVideoSrc = localStorage.getItem("videoSrc");
+      if (!originalVideoSrc) {
+        throw new Error("Original video not found");
+      }
+
+      // Create a filename that indicates the selected speed
+      const speedText = speed === 1 ? "original" : `${speed}x_speed`;
+      const fileName = `video_${speedText}.mp4`;
+
+      // Fetch the blob from the URL
+      const response = await fetch(originalVideoSrc);
+      const blob = await response.blob();
+
+      // Create download link
+      const link = document.createElement("a");
+      const url = URL.createObjectURL(blob);
+      link.href = url;
+      link.download = fileName;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      // Clean up the temporary URL
+      URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error("Error downloading video:", error);
+      alert("Error downloading video. Please try again.");
+    } finally {
+      setIsProcessing(false);
+    }
   }
   if (!videoSrc) {
     return (
@@ -50,8 +88,15 @@ function PlayerPage() {
   return (
     <main className="min-h-screen bg-black text-white font-sans overflow-x-hidden relative">
       {" "}
-      {/* Top Right Button - Fixed to very corner */}
-      <div className="fixed top-4 right-4 z-50">
+      {/* Top Right Buttons - Fixed to very corner */}
+      <div className="fixed top-4 right-4 z-50 flex space-x-3">
+        <button
+          onClick={downloadVideoWithSpeed}
+          disabled={isProcessing}
+          className="green-button px-4 py-2 rounded-lg text-sm"
+        >
+          {isProcessing ? "Processing..." : "↓ Download Video"}
+        </button>
         <button
           onClick={goBackToUpload}
           className="white-button px-4 py-2 rounded-lg text-sm"
